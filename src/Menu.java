@@ -168,6 +168,9 @@ public class Menu {
 
         System.out.println("--------------------------------");
         System.out.println("Dishes count : " + menu.stream().map(dish -> 1).reduce(Integer::sum));
+
+        System.out.println("--------------------------------");
+        int sumCalories = menu.stream().mapToInt(Dish::getCalories).sum();
     }
 
     public static Function<Integer, Stream<Integer[]>> myF2(List<Integer> numbers) {
