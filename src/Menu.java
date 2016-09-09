@@ -7,17 +7,7 @@ import java.util.stream.Stream;
 
 public class Menu {
     public static void main(String args[]) {
-        List<Dish> menu = Arrays.asList(
-                new Dish("pork", false, 800, Dish.Type.MEAT),
-                new Dish("beef", false, 700, Dish.Type.MEAT),
-                new Dish("chicken", false, 400, Dish.Type.MEAT),
-                new Dish("french fries", true, 530, Dish.Type.OTHER),
-                new Dish("rice", true, 530, Dish.Type.OTHER),
-                new Dish("season fruit", true, 120, Dish.Type.OTHER),
-                new Dish("pizza", true, 550, Dish.Type.OTHER),
-                new Dish("prawns", false, 300, Dish.Type.FISH),
-                new Dish("salmon", true, 450, Dish.Type.FISH)
-        );
+        List<Dish> menu = getDishes();
 
         System.out.println("--------------------------------");
 
@@ -173,6 +163,20 @@ public class Menu {
         int sumCalories = menu.stream().mapToInt(Dish::getCalories).sum();
     }
 
+    public static List<Dish> getDishes() {
+        return Arrays.asList(
+                new Dish("pork", false, 800, Dish.Type.MEAT),
+                new Dish("beef", false, 700, Dish.Type.MEAT),
+                new Dish("chicken", false, 400, Dish.Type.MEAT),
+                new Dish("french fries", true, 530, Dish.Type.OTHER),
+                new Dish("rice", true, 530, Dish.Type.OTHER),
+                new Dish("season fruit", true, 120, Dish.Type.OTHER),
+                new Dish("pizza", true, 550, Dish.Type.OTHER),
+                new Dish("prawns", false, 300, Dish.Type.FISH),
+                new Dish("salmon", true, 450, Dish.Type.FISH)
+        );
+    }
+
     public static Function<Integer, Stream<Integer[]>> myF2(List<Integer> numbers) {
         return d -> numbers.stream().map(j -> new Integer[]{d, j});
     }
@@ -224,4 +228,5 @@ class Dish {
     }
 
     public enum Type {MEAT, FISH, OTHER}
+
 }
