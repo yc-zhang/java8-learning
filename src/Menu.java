@@ -155,6 +155,19 @@ public class Menu {
         numbers = Arrays.asList(2, 3, 5, 12, 1, 2, 5, 6);
         System.out.println(numbers.stream().reduce(0, (a, b) -> a + b));
         System.out.println(numbers.stream().reduce(1, (a, b) -> a * b));
+        System.out.println(numbers.stream().reduce(0, (a, b) -> Integer.sum(a, b)));
+        System.out.println(numbers.stream().reduce(0, Integer::sum));
+        Optional<Integer> sum = numbers.stream().reduce(Integer::sum);
+        System.out.println(sum.isPresent() ? sum.get() : null);
+
+        System.out.println("--------------------------------");
+        Optional<Integer> max = numbers.stream().reduce((a, b) -> a > b ? a : b);
+        Integer max2 = numbers.stream().reduce(0, (a, b) -> a > b ? a : b);
+        System.out.println(max.isPresent() ? max.get() : null);
+        System.out.println(numbers.stream().reduce(Integer::max));
+
+        System.out.println("--------------------------------");
+        System.out.println("Dishes count : " + menu.stream().map(dish -> 1).reduce(Integer::sum));
     }
 
     public static Function<Integer, Stream<Integer[]>> myF2(List<Integer> numbers) {
@@ -206,7 +219,6 @@ class Dish {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public enum Type {MEAT, FISH, OTHER}
 }
