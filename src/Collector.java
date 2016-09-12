@@ -64,7 +64,32 @@ public class Collector {
                 });
             });
         });
+
+        Map<Boolean, List<Dish>> partitionedMenu = menu.stream().collect(partitioningBy(Dish::isVegetarian));
+
+        partitionedMenu.entrySet().stream().forEach(t -> {
+            System.out.println("-----------------------");
+            System.out.println(t.getKey());
+            t.getValue().stream().forEach(dish -> System.out.println(dish.getName()));
+        });
+
+        Map<Boolean, Map<Dish.Type, List<Dish>>> vegetarianDishesByType = menu.stream()
+                .collect(partitioningBy(Dish::isVegetarian, groupingBy(Dish::getType)));
+        System.out.println(vegetarianDishesByType);
+
+        Map<Boolean, List<Dish>> vegetarianDishList = menu.stream()
+                .collect(partitioningBy(Dish::isVegetarian, toList()));
+        System.out.println(vegetarianDishList);
+
+        Map<Boolean, Optional<Dish>> mostCaloricOptionalPartitionedByVegetarian = menu.stream()
+                .collect(partitioningBy(Dish::isVegetarian, maxBy(Comparator.comparingInt(Dish::getCalories))));
+        System.out.println(mostCaloricOptionalPartitionedByVegetarian);
+
+        Map<Boolean, Dish> mostCaloricPartitionedByVegetarian = menu.stream()
+                .collect(partitioningBy(Dish::isVegetarian, collectingAndThen(maxBy(dishComparator), Optional::get)));
+
+        System.out.println(mostCaloricPartitionedByVegetarian);
     }
 
-    public enum CaloricLevel {DIET, NORMAL, FAT}
+    private enum CaloricLevel {DIET, NORMAL, FAT}
 }
