@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class FileStream {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         try (Stream<String> lines = Files.lines(Paths.get("README.md"), Charset.defaultCharset())) {
             long count = lines.flatMap(line -> Arrays.stream(line.split(" ")))
                     .distinct()
