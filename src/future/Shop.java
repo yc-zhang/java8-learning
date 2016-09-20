@@ -4,8 +4,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import static java.util.concurrent.CompletableFuture.supplyAsync;
-
 public class Shop {
 
     private String name;
@@ -28,7 +26,11 @@ public class Shop {
 //        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
 //        new Thread(() -> {
 //            double price = calculatePrice(product);
-//            futurePrice.complete(price);
+//            try {
+//                futurePrice.complete(price);
+//            } catch (Exception ex) {
+//                futurePrice.completeExceptionally(ex);
+//            }
 //        }).start();
 //        return futurePrice;
     }
